@@ -59,7 +59,7 @@ Note: `compleat.suggest()` also accepts an optional `lang` parameter, which is "
 ['bonoloto', 'bonus', 'bon jovi', 'bones', 'bonsai']
 ```
 
-Note: `compleat.suggest()` also accepts an optional `site` parameter, which is "" (Google) by default. Others include `bo` for google books, `i` for google images, and `yt` for youtube.
+Note: `compleat.suggest()` also accepts an optional `site` parameter, which is "" (Google) by default. Others include `bo` for google books, `i` for google images, and `yt` for youtube, as well as `n` for news, `pr`, `sh` for shopping, `v` for videos.
 
 ```python
 >>> import compleat

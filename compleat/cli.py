@@ -56,7 +56,7 @@ def log_query(query_string, lang):
     template = u"{lang}: {query}\n"
     msg = template.format(lang=lang, query=query_string)
     sys.stderr.write(msg)
-    
+
 def exec_query(query_string, lang):
     time.sleep(args.wait)
     log_query(query_string, lang)

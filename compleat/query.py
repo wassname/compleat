@@ -6,6 +6,14 @@ import datetime
 import random
 
 class Query(object):
+    """
+    Query object representing autocomplete suggestions from Google Search.
+
+    @methods:
+    - suggestions: an array of dicts with fields: 'relevance', 'text', 'title', 'type'
+    - meta: dict with fields: lang, query, uuid, site, timestamp
+
+    """
     URL_TEMPLATE = "http://suggestqueries.google.com/complete/search?client=chrome&hl={lang}&q={query}&ds={site}"
     def __init__(self, query, lang="en", site=""):
         self.query = query
@@ -15,6 +23,12 @@ class Query(object):
         self.rand = str(random.random())
         req = requests.get(self.url, headers={'User-Agent': requests.utils.default_user_agent() + '/r=' + self.rand})
         self.response = req.json()
+
+    def __repr__(self):
+        return '<compleat.query.Query: %s, results=%s >' % (self.meta, len(self.suggestions))
+
+    def __str__(self):
+        return 'Query: %s, results %s, time=%s' % (self.meta['query'], len(self.suggestions), self.meta['timestamp'])
 
     @property
     def url(self):
