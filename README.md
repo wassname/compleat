@@ -59,6 +59,18 @@ Note: `compleat.suggest()` also accepts an optional `lang` parameter, which is "
 ['bonoloto', 'bonus', 'bon jovi', 'bones', 'bonsai']
 ```
 
+Note: `compleat.suggest()` also accepts an optional `site` parameter, which is "" (Google) by default. Others include `bo` for google books, `i` for google images, and `yt` for youtube.
+
+```python
+>>> import compleat
+>>> [ s["text"] for s in compleat.suggest("bon", site="yt").suggestions[:5] ]
+['bon jovi', 'bone thugs n harmony', 'bonetrousle', 'bones', 'bon iver']
+>>> [ s["text"] for s in compleat.suggest("bon", site="bo").suggestions[:5] ]
+['bone', 'bonhoeffer', 'bonnie and clyde', 'bond', 'bonsai']
+>>> [ s["text"] for s in compleat.suggest("bon", site="i").suggestions[:5] ]
+['bonnie wright', 'bonnie and clyde', 'bonsai', 'bong', 'bone']
+```
+
 ### Command-line tool
 
 Run `compleat -h` from the command line for full set of options. Examples:
@@ -72,4 +84,3 @@ Run `compleat -h` from the command line for full set of options. Examples:
 `compleat -q "who is " "why is " "where is "`
 
 `compleat --template "is {} " -q "allen iverson" "marie curie" "meryl streep"`
-

@@ -6,13 +6,14 @@ import datetime
 import random
 
 class Query(object):
-    URL_TEMPLATE = "http://suggestqueries.google.com/complete/search?client=chrome&hl={lang}&q={query}"
-    def __init__(self, query, lang="en"):
+    URL_TEMPLATE = "http://suggestqueries.google.com/complete/search?client=chrome&hl={lang}&q={query}&ds={site}"
+    def __init__(self, query, lang="en", site=""):
         self.query = query
         self.lang = lang
+        self.site = site
         self.timestamp = datetime.datetime.now()
         self.rand = str(random.random())
-        req = requests.get(self.url)
+        req = requests.get(self.url, headers={'User-Agent': requests.utils.default_user_agent() + '/r=' + self.rand})
         self.response = req.json()
 
     @property
@@ -21,7 +22,8 @@ class Query(object):
         escaped = urllib.parse.quote(encoded)
         return self.URL_TEMPLATE.format(
             query=escaped,
-            lang=self.lang)
+            lang=self.lang,
+            site=self.site)
 
     @property
     def suggestions(self):
@@ -55,5 +57,6 @@ class Query(object):
             "query": self.query,
             "lang": self.lang,
             "timestamp": self.timestamp.ctime(),
-            "uid": self.uid
+            "uid": self.uid,
+            "site": self.site,
         }
