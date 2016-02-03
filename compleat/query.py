@@ -18,7 +18,7 @@ class Query(object):
     @property
     def url(self):
         encoded = self.query.encode("utf-8")
-        escaped = urllib.quote(encoded)
+        escaped = urllib.parse.quote(encoded)
         return self.URL_TEMPLATE.format(
             query=escaped,
             lang=self.lang)
